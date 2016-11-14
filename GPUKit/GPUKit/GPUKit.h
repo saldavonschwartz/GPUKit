@@ -41,7 +41,7 @@
 #include <cassert>
 
 /*	To use something other than GLFW, include your GL wrapper lib in GLWrapper.h and
-	modify GPUKit::init and GPUKit::shutdown with the appropriate implementatio.*/
+	modify GPUKit::init and GPUKit::shutdown with the appropriate implementation.*/
 
 namespace OXFEDE { 
 
@@ -57,8 +57,13 @@ namespace OXFEDE {
 		};
 
 		static GLFWwindow* window;
+		static GPUKitFramework* logDummy{ nullptr };
 
 		void init(glm::uvec2 windowSize, GLVersion glVersion) {
+			OXFEDE_LOG(LType::I, GPUKIT::General, logDummy,
+				"-- GPUKit init (window = %p) --",
+				window);
+
 			assert(!window);
 
 			glfwInit();
@@ -77,41 +82,40 @@ namespace OXFEDE {
 
 			glfwMakeContextCurrent(window);
 			glewInit();
-
-			OXFEDE_LOG(LType::I, GPUKIT::General, (GPUKitFramework*)nullptr, 
-				"-- GPUKit init (window = %p) --", window);
 		}
 
 		void shutDown() {
+			OXFEDE_LOG(LType::I, GPUKIT::General, logDummy,
+				"-- GPUKit shutdown --");
+
 			assert(window);
+
 			glfwDestroyWindow(window);
 			window = nullptr;
-			
-			OXFEDE_LOG(LType::I, GPUKIT::General, (GPUKitFramework*)nullptr, 
-				"-- GPUKit shutdown --");
 		}
 
 		void swapBuffers() {
-			glfwSwapBuffers(window);
-
-			OXFEDE_LOG(LType::I, GPUKIT::General, (GPUKitFramework*)nullptr, 
-				"glfwSwapBuffers((window %p))", 
+			OXFEDE_LOG(LType::I, GPUKIT::General, logDummy,
+				"glfwSwapBuffers((window %p))",
 				window);
+
+			glfwSwapBuffers(window);
 		}
 
 		void drawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid* indices) {
-			glDrawElements(mode, count, type, indices);
-
-			OXFEDE_LOG(LType::I, GPUKIT::General, (GPUKitFramework*)nullptr, 
-				"glDrawElements(%i, %i, %i, %p)", 
+			OXFEDE_LOG(LType::I, GPUKIT::General, logDummy,
+				"glDrawElements(%i, %i, %i, %p)",
 				mode, count, type, indices);
+
+			glDrawElements(mode, count, type, indices);
 		}
 
 		void drawArrays(GLenum mode, GLint first, GLsizei count) {
-			glDrawArrays(mode, first, count);
-			OXFEDE_LOG(LType::I, GPUKIT::General, (GPUKitFramework*)nullptr, 
-				"glDrawArrays(%i, %i, %i)", 
+			OXFEDE_LOG(LType::I, GPUKIT::General, logDummy,
+				"glDrawArrays(%i, %i, %i)",
 				mode, first, count);
+
+			glDrawArrays(mode, first, count);
 		}
 	}
 }
