@@ -29,7 +29,7 @@ The framework also has a couple higher level constructs:
 
 ## Example:
 
-There is an example folder that uses the framework to render the following [scene](https://youtu.be/iN3yRDaDQ2g). It comes with 3d models as well pas Passes and all shaders for a deferred pipeline including dynamic point shadows and bloom.
+There is an example folder that uses the framework to render the following [scene](https://youtu.be/iN3yRDaDQ2g). It comes with 3d models as well as all passes and shaders for a deferred pipeline including dynamic point shadows and bloom.
 
 Please note that the example uses [Assimp](https://github.com/assimp/assimp) to parse fbx / obj files into geometry objects. You'll need that lib too if you want to use the project as is.
 
