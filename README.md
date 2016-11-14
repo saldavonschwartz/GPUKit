@@ -2,7 +2,19 @@
 
 A C++ framework for using OpenGL in an object oriented way.
 
-This is work in progress...
+The framework exposes OpenGL functionality thru an object oriented interface. It's still work in progress but supports the following constructs so far:
+
+. vertex, geometry and fragment shaders (including the ability to parse text files into these objects.)
+. programs, which expose vertex inputs / outputs thru a parameterized interface.
+. buffers, which expose texture target binding for shader output.
+. 2D and 3D (Cubemap) textures.
+. geometry.
+
+The framework also has a couple higher level constructs:
+. Passes: a way to organize the rendering code associated with a program / buffer combination.
+. Material: a way to proxy a program's attributes (shader uniforms) so the program can be shared among different geometry.
+
+## Dependencies: 
 
 ## How to use it:
 1. Include the whole GPUKit source folder in your project, or build it into a library and link against that.
