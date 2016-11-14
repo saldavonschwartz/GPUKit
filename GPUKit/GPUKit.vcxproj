@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2B76D20E-535A-4613-BA47-D5A3E9583501}</ProjectGuid>
+    <RootNamespace>GPUKit</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\cygwin64\usr\local\include;($ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\cygwin64\usr\local\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="GPUKit\Buffer\Buffer.cpp" />
+    <ClCompile Include="GPUKit\Geometry\Geometry.cpp" />
+    <ClCompile Include="GPUKit\Pass\Pass.cpp" />
+    <ClCompile Include="GPUKit\Program\Program.cpp" />
+    <ClCompile Include="GPUKit\Program\ProgramImporter.cpp" />
+    <ClCompile Include="GPUKit\Shader\FShader\FShaderImporter.cpp" />
+    <ClCompile Include="GPUKit\Shader\Shader.cpp" />
+    <ClCompile Include="GPUKit\Shader\ShaderImporterCommon.cpp" />
+    <ClCompile Include="GPUKit\Shader\GShader\GShaderImporter.cpp" />
+    <ClCompile Include="GPUKit\Shader\VShader\VShaderImporter.cpp" />
+    <ClCompile Include="GPUKit\Material\Material.cpp" />
+    <ClCompile Include="GPUKit\Texture\2D\Texture2D.cpp" />
+    <ClCompile Include="GPUKit\Texture\2D\Texture2DImporter.cpp" />
+    <ClCompile Include="GPUKit\Texture\3D\Texture3D.cpp" />
+    <ClCompile Include="GPUKit\Texture\3D\Texture3DImporter.cpp" />
+    <ClCompile Include="GPUKit\Texture\Texture.cpp" />
+    <ClCompile Include="Dependencies\Logger\Logger.cpp" />
+    <ClCompile Include="Example\main.cpp" />
+    <ClCompile Include="Example\Scene\NodeImporter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Example\Passes\BlendPass.h" />
+    <ClInclude Include="Example\Passes\BlurPass.h" />
+    <ClInclude Include="Example\Passes\GeometryPass.h" />
+    <ClInclude Include="Example\Passes\LightPass.h" />
+    <ClInclude Include="Example\Passes\ShadowPass.h" />
+    <ClInclude Include="Example\Passes\SkyboxPass.h" />
+    <ClInclude Include="Example\Scene\HighLevelTypes.h" />
+    <ClInclude Include="GPUKit\Geometry\Geometry.h" />
+    <ClInclude Include="GPUKit\Material\Material.h" />
+    <ClInclude Include="Dependencies\Logger\Logger.h" />
+    <ClInclude Include="Dependencies\AssetImporter\AssetImporter.h" />
+    <ClInclude Include="Dependencies\Defines.h" />
+    <ClInclude Include="GPUKit\GLWrapper.h" />
+    <ClInclude Include="GPUKit\Buffer\Buffer.h" />
+    <ClInclude Include="GPUKit\GPUKit.h" />
+    <ClInclude Include="GPUKit\Pass\Pass.h" />
+    <ClInclude Include="GPUKit\Program\Program.h" />
+    <ClInclude Include="GPUKit\Program\ProgramImporter.h" />
+    <ClInclude Include="GPUKit\Shader\FShader\FShader.h" />
+    <ClInclude Include="GPUKit\Shader\FShader\FShaderImporter.h" />
+    <ClInclude Include="GPUKit\Shader\Shader.h" />
+    <ClInclude Include="GPUKit\Shader\ShaderImporterCommon.h" />
+    <ClInclude Include="GPUKit\Shader\Shaders.h" />
+    <ClInclude Include="GPUKit\Shader\GShader\GShader.h" />
+    <ClInclude Include="GPUKit\Shader\GShader\GShaderImporter.h" />
+    <ClInclude Include="GPUKit\Shader\VShader\VShader.h" />
+    <ClInclude Include="GPUKit\Shader\VShader\VShaderImporter.h" />
+    <ClInclude Include="GPUKit\Importers.h" />
+    <ClInclude Include="GPUKit\Texture\2D\Texture2D.h" />
+    <ClInclude Include="GPUKit\Texture\2D\Texture2DImporter.h" />
+    <ClInclude Include="GPUKit\Texture\3D\Texture3D.h" />
+    <ClInclude Include="GPUKit\Texture\3D\Texture3DImporter.h" />
+    <ClInclude Include="GPUKit\Texture\Texture.h" />
+    <ClInclude Include="GPUKit\Texture\Textures.h" />
+    <ClInclude Include="GPUKit\Logger.h" />
+    <ClInclude Include="Example\Scene\NodeImporter.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assimp-vc140-mt.dll" />
+    <None Include="Example\Models\Bad Omen.nfo" />
+    <None Include="Example\Models\Cube.fbx" />
+    <None Include="Example\Models\Scene.fbx" />
+    <None Include="Additional\Content\Shaders\B.glsl" />
+    <None Include="Example\Shaders\Blend.glsl" />
+    <None Include="Example\Shaders\Blur.glsl" />
+    <None Include="Additional\Content\Shaders\G.glsl" />
+    <None Include="Example\Shaders\Geometry.glsl" />
+    <None Include="Additional\Content\Shaders\L.glsl" />
+    <None Include="Example\Shaders\Lighting.glsl" />
+    <None Include="Example\Shaders\Shadow.glsl" />
+    <None Include="Example\Shaders\Skybox.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Example\Models\skybox\badomen1.tga" />
+    <Image Include="Example\Models\skybox\badomen2.tga" />
+    <Image Include="Example\Models\skybox\badomen3.tga" />
+    <Image Include="Example\Models\skybox\badomen4.tga" />
+    <Image Include="Example\Models\skybox\badomen5.tga" />
+    <Image Include="Example\Models\skybox\badomen6.tga" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Example\Models\license.txt" />
+    <Text Include="logDefault.log" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
