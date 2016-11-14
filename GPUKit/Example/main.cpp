@@ -231,8 +231,8 @@ int main() {
 		}
 		else {
 			done = true;
-			if (done && lightLNode->M[3][0] < rightBound) {
-				lightLNode->M[3][0] +=  0.65f * (float)deltaTime;
+			if (done && lightRNode->M[3][0] < rightBound) {
+				lightRNode->M[3][0] +=  0.65f * (float)deltaTime;
 			}
 			else {
 				done = false;
