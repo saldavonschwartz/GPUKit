@@ -52,19 +52,19 @@ Geometry::Geometry() :
 	glGenBuffers(1, &_private->vbo);
 	glGenBuffers(1, &_private->ebo);
 
-	OXFEDE_LOG(LType::I, GPUKIT::General, this,
+	OXFEDE_LOG(LType::I, LGPK::General, this,
 		"-- create geometry: id: %i --", 
 		_private->id);
 
-	OXFEDE_LOG(LType::I, GPUKIT::Geometry, this,
+	OXFEDE_LOG(LType::I, LGPK::Geometry, this,
 		"glGenVertexArrays(1, _): %i", 
 		_private->id);
 
-	OXFEDE_LOG(LType::I, GPUKIT::Geometry, this,
+	OXFEDE_LOG(LType::I, LGPK::Geometry, this,
 		"glGenBuffers(1, _): %i (VBO)", 
 		_private->vbo);
 
-	OXFEDE_LOG(LType::I, GPUKIT::Geometry, this,
+	OXFEDE_LOG(LType::I, LGPK::Geometry, this,
 		"glGenBuffers(1, _): %i (EBO)", 
 		_private->ebo);
 }

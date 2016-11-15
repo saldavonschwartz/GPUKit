@@ -30,18 +30,18 @@
 
 namespace OXFEDE {
 
-	OXFEDE_FLAG(GPUKIT, uint8_t,) {
+	OXFEDE_FLAG(LGPK, uint8_t,) {
 		Texture = 1 << 0,
 		Program = 1 << 1,
 		Buffer = 1 << 2,
 		Shader = 1 << 3,
 		Uniform = 1 << 4,
-		VertexArray = 1 << 5,
+		Geometry = 1 << 5,
 		General = 1 << 6,
 		Importer = 1 << 7
 	};
 
-	class logGPK final : public Logger<GPUKIT> {
+	class logGPK final : public Logger<LGPK> {
 
 	public:
 		static logGPK& getInstance() {
@@ -53,24 +53,24 @@ namespace OXFEDE {
 		logGPK(std::string name, std::string path, bool useBackgroundThread) :
 			Logger(name, path, useBackgroundThread) {
 			fileLog = 
-				GPUKIT::Texture
-				| GPUKIT::Program
-				| GPUKIT::Buffer
-				| GPUKIT::Shader
-				| GPUKIT::Uniform
-				| GPUKIT::VertexArray
-				| GPUKIT::General
-				| GPUKIT::Importer;
+				LGPK::Texture
+				| LGPK::Program
+				| LGPK::Buffer
+				| LGPK::Shader
+				| LGPK::Uniform
+				| LGPK::Geometry
+				| LGPK::General
+				| LGPK::Importer;
 			
 			screenLog =
-				GPUKIT::Texture
-				| GPUKIT::Program
-				| GPUKIT::Buffer
-				| GPUKIT::Shader
-				| GPUKIT::Uniform
-				| GPUKIT::VertexArray
-				| GPUKIT::General
-				| GPUKIT::Importer;
+				LGPK::Texture
+				| LGPK::Program
+				| LGPK::Buffer
+				| LGPK::Shader
+				| LGPK::Uniform
+				| LGPK::Geometry
+				| LGPK::General
+				| LGPK::Importer;
 		}
 
 		~logGPK() = default;

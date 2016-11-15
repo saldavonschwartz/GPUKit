@@ -43,13 +43,13 @@ static unordered_map<string, Texture2D*> cached;
 Texture2D* AssetImporter<Texture2D*>::import(const string& path, Texture2D::Data data, bool flipped) {
 	static AssetImporter<Texture2D*>* logDummy = nullptr;
 	
-	OXFEDE_LOG(LType::I, GPUKIT::General, logDummy, 
+	OXFEDE_LOG(LType::I, LGPK::General, logDummy, 
 		"-- import: path: %s --", 
 		path.c_str());
 
 	auto found = cached.find(path);
 	if (found != cached.end()) {
-		OXFEDE_LOG(LType::I, GPUKIT::General, logDummy, 
+		OXFEDE_LOG(LType::I, LGPK::General, logDummy, 
 			"-- return cached asset for path --");
 		
 		return found->second;
@@ -62,7 +62,7 @@ Texture2D* AssetImporter<Texture2D*>::import(const string& path, Texture2D::Data
 	stbi_set_flip_vertically_on_load(flipped);
 	uint8_t* bytes = stbi_load(path.c_str(), &width, &height, &componentCount, STBI_rgb);
 
-	OXFEDE_LOG( bytes ? LType::I : LType::E, GPUKIT::General, logDummy, 
+	OXFEDE_LOG( bytes ? LType::I : LType::E, LGPK::General, logDummy, 
 		"-- bytes = %p --", 
 		bytes);
 	
@@ -71,14 +71,14 @@ Texture2D* AssetImporter<Texture2D*>::import(const string& path, Texture2D::Data
 	data.image.bytes = bytes;
 	data.image.size = { width, height };
 
-	OXFEDE_LOG(LType::I, GPUKIT::Importer, logDummy, 
+	OXFEDE_LOG(LType::I, LGPK::Importer, logDummy, 
 		"-- ============ STATS: ============== --");
 	
-	OXFEDE_LOG(LType::I, GPUKIT::Importer, logDummy, 
+	OXFEDE_LOG(LType::I, LGPK::Importer, logDummy, 
 		"-- size: (%i, %i)\nflipped: %s --", 
 		width, height, flipped ? "yes" : "no");
 	
-	OXFEDE_LOG(LType::I, GPUKIT::Importer, logDummy, 
+	OXFEDE_LOG(LType::I, LGPK::Importer, logDummy, 
 		"-- ------------ END --------------- --");
 
 	Texture2D* texture = new Texture2D(data);

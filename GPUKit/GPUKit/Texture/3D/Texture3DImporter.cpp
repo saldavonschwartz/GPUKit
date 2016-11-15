@@ -44,13 +44,13 @@ static unordered_map<string, Texture3D*> cached;
 Texture3D* AssetImporter<Texture3D*>::import(const string& path, Texture3D::Data data, bool flipped) {	
 	static AssetImporter<Texture3D*>* logDummy = nullptr;
 	
-	OXFEDE_LOG(LType::I, GPUKIT::General, logDummy, 
+	OXFEDE_LOG(LType::I, LGPK::General, logDummy, 
 		"-- import: path: %s --",
 		path.c_str());
 
 	auto found = cached.find(path);
 	if (found != cached.end()) {
-		OXFEDE_LOG(LType::I, GPUKIT::General, logDummy, 
+		OXFEDE_LOG(LType::I, LGPK::General, logDummy, 
 			"-- return cached --");
 		
 		return found->second;
@@ -71,15 +71,15 @@ Texture3D* AssetImporter<Texture3D*>::import(const string& path, Texture3D::Data
 		data.image[i].size = { width, height };
 		i++;
 
-		OXFEDE_LOG(LType::I, GPUKIT::Importer, logDummy, 
+		OXFEDE_LOG(LType::I, LGPK::Importer, logDummy, 
 			"-- ============ STATS: ============== --");
 
-		OXFEDE_LOG(LType::I, GPUKIT::Importer, logDummy, 
+		OXFEDE_LOG(LType::I, LGPK::Importer, logDummy, 
 			"-- size: (%i, %i) | flipped: %s --", 
 			width, height, flipped ? "yes" : "no");
 	}
 
-	OXFEDE_LOG(LType::I, GPUKIT::Importer, logDummy, 
+	OXFEDE_LOG(LType::I, LGPK::Importer, logDummy, 
 		"-- ------------ END --------------- --");
 
 	Texture3D* texture = new Texture3D(data);

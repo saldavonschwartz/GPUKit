@@ -41,7 +41,7 @@ Texture2D::Texture2D(Data data) :
 }
 
 void Texture2D::commit() { 
-	OXFEDE_LOG(LType::I, GPUKIT::General, this,
+	OXFEDE_LOG(LType::I, LGPK::General, this,
 		"-- commit texture: id: %i --", 
 		getId());
 
@@ -55,7 +55,7 @@ void Texture2D::commit() {
 		0, data.image.sourceformat, data.image.size.x, data.image.size.y,
 		0, data.image.targetFormat, data.image.pixelType, data.image.bytes);
 
-	OXFEDE_LOG(LType::I, GPUKIT::Texture, this, 
+	OXFEDE_LOG(LType::I, LGPK::Texture, this, 
 		"glTexImage2D(%i, 0, %i, %i, %i, 0, %i, %i, %p)", type,
 		data.image.targetFormat, data.image.size.x, data.image.size.y,
 		data.image.sourceformat, data.image.pixelType, data.image.bytes
@@ -66,31 +66,31 @@ void Texture2D::commit() {
 	glTexParameteri(type, GL_TEXTURE_WRAP_S, data.wrapMode.S);
 	glTexParameteri(type, GL_TEXTURE_WRAP_T, data.wrapMode.T);
 
-	OXFEDE_LOG(LType::I, GPUKIT::Texture, this, 
+	OXFEDE_LOG(LType::I, LGPK::Texture, this, 
 		"glTexParameteri(%i, GL_TEXTURE_MIN_FILTER, %i)", 
 		type, data.filter.minification);
 	
-	OXFEDE_LOG(LType::I, GPUKIT::Texture, this, 
+	OXFEDE_LOG(LType::I, LGPK::Texture, this, 
 		"glTexParameteri(%i, GL_TEXTURE_MAG_FILTER, %i)", 
 		type, data.filter.magnification);
 	
-	OXFEDE_LOG(LType::I, GPUKIT::Texture, this, 
+	OXFEDE_LOG(LType::I, LGPK::Texture, this, 
 		"glTexParameteri(%i, GL_TEXTURE_WRAP_S, %i)", 
 		type, data.wrapMode.S);
 	
-	OXFEDE_LOG(LType::I, GPUKIT::Texture, this, 
+	OXFEDE_LOG(LType::I, LGPK::Texture, this, 
 		"glTexParameteri(%i, GL_TEXTURE_WRAP_T, %i)", 
 		type, data.wrapMode.T);
 
 	if (data.mipmaps) {
 		glGenerateMipmap(type);
 
-		OXFEDE_LOG(LType::I, GPUKIT::Texture, this, 
+		OXFEDE_LOG(LType::I, LGPK::Texture, this, 
 			"glGenerateMipmaps()", 
 			type);
 	}
 	else {
-		OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+		OXFEDE_LOG(LType::I, LGPK::General, this, 
 			"no mipmaps",
 			type);
 	}
@@ -107,13 +107,13 @@ void Texture2D::fetch() {
 		data.image.bytes = (uint8_t*)malloc(bytes);
 		glGetTexImage(getType(), 0, data.image.sourceformat, data.image.pixelType, data.image.bytes);
 		
-		OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+		OXFEDE_LOG(LType::I, LGPK::General, this, 
 			"-- fetch texture: id: %i --", 
 			getId());
 
-		OXFEDE_LOG(LType::I, GPUKIT::Texture, this, 
+		OXFEDE_LOG(LType::I, LGPK::Texture, this, 
 			"glGetTexImage(%i, 0, %i, %i, %p)", 
-			type, data.image.sourceformat, data.image.pixelType, data.image.bytes);
+			getType(), data.image.sourceformat, data.image.pixelType, data.image.bytes);
 	}
 }
 

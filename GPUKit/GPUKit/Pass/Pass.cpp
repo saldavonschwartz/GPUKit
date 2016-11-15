@@ -50,11 +50,11 @@ struct Pass::_Private {
 			
 			glGenVertexArrays(1, &quadVAO);
 			
-			OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+			OXFEDE_LOG(LType::I, LGPK::General, this, 
 				"-- create quad pass VAO --", 
 				quadVAO);
 
-			OXFEDE_LOG(LType::I, GPUKIT::VertexArray, this, 
+			OXFEDE_LOG(LType::I, LGPK::Geometry, this, 
 				"glGenVertexArrays(1, _): %i", 
 				quadVAO);
 
@@ -89,7 +89,7 @@ void Pass::setOutput(const string& key, Texture* value) {
 	buffer->setAttachment(target, value);
 	buffer->setAttachmentWriteEnabled(target, true);
 
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+	OXFEDE_LOG(LType::I, LGPK::General, this, 
 		"-- target %i (%s) <= texture --", 
 		target, key.c_str(),  value ? value->getId() : 0);
 }
@@ -102,7 +102,7 @@ Texture* Pass::getOutput(const string& key) const {
 void Pass::renderQuad() {
 	static Pass* logDummy = nullptr;
 
-	OXFEDE_LOG(LType::I, GPUKIT::General, logDummy,
+	OXFEDE_LOG(LType::I, LGPK::General, logDummy,
 		"-- render quad --");
 	
 	glBindVertexArray(_Private::quadVAO);

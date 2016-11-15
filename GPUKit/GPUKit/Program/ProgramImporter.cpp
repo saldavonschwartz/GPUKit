@@ -48,12 +48,12 @@ static unordered_map<string, Program*> cached;
 Program* AssetImporter<Program*>::import(const string& path) {
 	static AssetImporter<Program*>* logDummy = nullptr;
 
-	OXFEDE_LOG(LType::I, GPUKIT::General, logDummy, 
+	OXFEDE_LOG(LType::I, LGPK::General, logDummy, 
 		"-- import: path: %s --", path.c_str());
 
 	auto found = cached.find(path);
 	if (found != cached.end()) {
-		OXFEDE_LOG(LType::I, GPUKIT::General, logDummy, 
+		OXFEDE_LOG(LType::I, LGPK::General, logDummy, 
 			"-- return cached --");
 
 		return found->second;

@@ -35,8 +35,8 @@ namespace OXFEDE {
 
 		public:
 			template <class... ArgsT>
-			static T import(ArgsT... args) = 0;
-			static void release(T asset) = 0;
+			static T import(ArgsT... args);
+			static void release(T asset);
 		};
 
 	}

@@ -61,19 +61,19 @@ Texture::Texture(Type type) :
 	_private->type = type;
 	glGenTextures(1, &_private->id);
 	
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+	OXFEDE_LOG(LType::I, LGPK::General, this, 
 		"-- create texture: id: %i --", _private->id);
 
-	OXFEDE_LOG(LType::I, GPUKIT::Texture, this, 
+	OXFEDE_LOG(LType::I, LGPK::Texture, this, 
 		"glGenTextures(1, _): %i", _private->id);
 }
 
 Texture::~Texture() {
 	glDeleteTextures(1, &_private->id);
 
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+	OXFEDE_LOG(LType::I, LGPK::General, this, 
 		"-- delete texture: id %i --", _private->id);
-	OXFEDE_LOG(LType::I, GPUKIT::Texture, this, 
+	OXFEDE_LOG(LType::I, LGPK::Texture, this, 
 		"glDeleteTextures(1, %i)", _private->id);
 }
 
@@ -84,16 +84,16 @@ Texture::Type Texture::getType() const {
 void Texture::setActive() {
 	glActiveTexture(_private->txu);
 
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+	OXFEDE_LOG(LType::I, LGPK::General, this, 
 		"-- activate texture: id: %i | TXU: %i (%i)) --", 
 		_private->id, _private->txu, _private->txu - GL_TEXTURE0);
 	
-	OXFEDE_LOG(LType::I, GPUKIT::Texture, this, 
+	OXFEDE_LOG(LType::I, LGPK::Texture, this, 
 		"glActiveTexture(%i)", _private->txu);
 
 	glBindTexture(_private->type, _private->id);
 	
-	OXFEDE_LOG(LType::I, GPUKIT::Texture, this, 
+	OXFEDE_LOG(LType::I, LGPK::Texture, this, 
 		"glBindTexture(%i, %i)", _private->type, _private->id);
 
 	_Private::active = this;

@@ -45,11 +45,11 @@ Shader::Shader(Type type) :
 	_private->type = type;
 	_private->id = glCreateShader(type);
 	
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+	OXFEDE_LOG(LType::I, LGPK::General, this, 
 		"-- create shader: id: %i --", 
 		_private->id);
 
-	OXFEDE_LOG(LType::I, GPUKIT::Shader, this, 
+	OXFEDE_LOG(LType::I, LGPK::Shader, this, 
 		"glCreateShader(): %i", 
 		_private->id);
 }
@@ -57,11 +57,11 @@ Shader::Shader(Type type) :
 Shader::~Shader() {
 	glDeleteShader(_private->id);
 
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+	OXFEDE_LOG(LType::I, LGPK::General, this, 
 		"-- delete shader: id: %i --", 
 		_private->id);
 	
-	OXFEDE_LOG(LType::I, GPUKIT::Shader, this, 
+	OXFEDE_LOG(LType::I, LGPK::Shader, this, 
 		"glDeleteShader(%i)", 
 		_private->id);
 
@@ -75,7 +75,7 @@ void Shader::compile() {
 		return;
 	}
 
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+	OXFEDE_LOG(LType::I, LGPK::General, this, 
 		"-- compile shader: id: %i --", 
 		_private->id);
 
@@ -84,13 +84,13 @@ void Shader::compile() {
 
 	glShaderSource(id, 1, &sourceCString, nullptr);
 
-	OXFEDE_LOG(LType::I, GPUKIT::Shader, this, 
+	OXFEDE_LOG(LType::I, LGPK::Shader, this, 
 		"glShaderSource(%i, %i, <source>, NULL)", 
 		id, 1);
 
 	glCompileShader(id);
 	
-	OXFEDE_LOG(LType::I, GPUKIT::Shader, this, 
+	OXFEDE_LOG(LType::I, LGPK::Shader, this, 
 		"glCompileShader(%i)", 
 		id);
 
@@ -100,7 +100,7 @@ void Shader::compile() {
 		GLchar* log = (GLchar*)malloc(sizeof(logLength) * logLength);
 		glGetShaderInfoLog(id, logLength, &logLength, log);
 		
-		OXFEDE_LOG(LType::W, GPUKIT::Shader, 
+		OXFEDE_LOG(LType::W, LGPK::Shader, 
 			this, log);
 		
 		free(log);
@@ -109,7 +109,7 @@ void Shader::compile() {
 	GLint status = GL_FALSE;
 	glGetShaderiv(id, GL_COMPILE_STATUS, &status);
 
-	OXFEDE_LOG(LType::I, GPUKIT::Shader, this, 
+	OXFEDE_LOG(LType::I, LGPK::Shader, this, 
 		"glGetShaderiv(%i, GL_COMPILE_STATUS, _) = %i", 
 		id, status);
 	

@@ -54,7 +54,7 @@ Material::~Material() {
 }
 
 void Material::setProgram(Program* program) {
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+	OXFEDE_LOG(LType::I, LGPK::General, this, 
 		"-- material %s: assign program: %i --", 
 		name.c_str(), program->getId());
 
@@ -74,7 +74,7 @@ void Material::setProgram(Program* program) {
 			auto proxyName = uniform.first.substr(9, uniform.first.length() - 1);
 			attributes[proxyName] = uniform.second->createProxy();
 
-			OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+			OXFEDE_LOG(LType::I, LGPK::General, this, 
 				"-- create material attributes %s --", 
 				proxyName.c_str());
 		}
@@ -86,7 +86,7 @@ Program* Material::getProgram() const {
 }
 
 void Material::commit() {
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+	OXFEDE_LOG(LType::I, LGPK::General, this, 
 		"-- commit material %s --", 
 		name.c_str());
 

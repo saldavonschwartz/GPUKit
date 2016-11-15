@@ -60,7 +60,7 @@ namespace OXFEDE {
 		static GPUKitFramework* logDummy{ nullptr };
 
 		void init(glm::uvec2 windowSize, GLVersion glVersion) {
-			OXFEDE_LOG(LType::I, GPUKIT::General, logDummy,
+			OXFEDE_LOG(LType::I, LGPK::General, logDummy,
 				"-- GPUKit init (window = %p) --",
 				window);
 
@@ -85,7 +85,7 @@ namespace OXFEDE {
 		}
 
 		void shutDown() {
-			OXFEDE_LOG(LType::I, GPUKIT::General, logDummy,
+			OXFEDE_LOG(LType::I, LGPK::General, logDummy,
 				"-- GPUKit shutdown --");
 
 			assert(window);
@@ -95,7 +95,7 @@ namespace OXFEDE {
 		}
 
 		void swapBuffers() {
-			OXFEDE_LOG(LType::I, GPUKIT::General, logDummy,
+			OXFEDE_LOG(LType::I, LGPK::General, logDummy,
 				"glfwSwapBuffers((window %p))",
 				window);
 
@@ -103,7 +103,7 @@ namespace OXFEDE {
 		}
 
 		void drawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid* indices) {
-			OXFEDE_LOG(LType::I, GPUKIT::General, logDummy,
+			OXFEDE_LOG(LType::I, LGPK::General, logDummy,
 				"glDrawElements(%i, %i, %i, %p)",
 				mode, count, type, indices);
 
@@ -111,7 +111,7 @@ namespace OXFEDE {
 		}
 
 		void drawArrays(GLenum mode, GLint first, GLsizei count) {
-			OXFEDE_LOG(LType::I, GPUKIT::General, logDummy,
+			OXFEDE_LOG(LType::I, LGPK::General, logDummy,
 				"glDrawArrays(%i, %i, %i)",
 				mode, first, count);
 

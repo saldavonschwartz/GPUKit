@@ -61,8 +61,8 @@ Buffer::Buffer() :
 	_private(new _Private()) {
 	glGenFramebuffers(1, &_private->id);
 
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, "-- create framebuffer (id = %i) --", _private->id);
-	OXFEDE_LOG(LType::I, GPUKIT::Buffer, this, "glGenFramebuffers(1, _) = %i", _private->id);
+	OXFEDE_LOG(LType::I, LGPK::General, this, "-- create framebuffer (id = %i) --", _private->id);
+	OXFEDE_LOG(LType::I, LGPK::Buffer, this, "glGenFramebuffers(1, _) = %i", _private->id);
 
 	for (int i = 0; i < Target::COUNT - 2; i++) {
 		_private->attachments[(Target)(0X8CE0 + i)] = {};
@@ -75,8 +75,8 @@ Buffer::Buffer() :
 Buffer::~Buffer() {
 	glDeleteFramebuffers(1, &_private->id);
 
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, "-- delete framebuffer (id = %i) --", _private->id);
-	OXFEDE_LOG(LType::I, GPUKIT::Buffer, this, "glDeleteFramebuffers(1, _) = %i", _private->id);
+	OXFEDE_LOG(LType::I, LGPK::General, this, "-- delete framebuffer (id = %i) --", _private->id);
+	OXFEDE_LOG(LType::I, LGPK::Buffer, this, "glDeleteFramebuffers(1, _) = %i", _private->id);
 }
 
 Buffer* Buffer::getActive() {
@@ -95,7 +95,7 @@ Buffer* Buffer::getMainBuffer() {
 }
 
 void Buffer::validate() const {
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+	OXFEDE_LOG(LType::I, LGPK::General, this, 
 		"-- validate framebuffer (id = %i) --", 
 		_private->id);
 
@@ -106,7 +106,7 @@ void Buffer::validate() const {
 		GLchar* log = (GLchar*)malloc(sizeof(logLength) * logLength);
 		glGetProgramInfoLog(_private->id, logLength, &logLength, log);
 		
-		OXFEDE_LOG(LType::E, GPUKIT::Buffer, this, log);
+		OXFEDE_LOG(LType::E, LGPK::Buffer, this, log);
 		
 		free(log);
 	}
@@ -114,11 +114,11 @@ void Buffer::validate() const {
 	GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	bool valid = status == GL_FRAMEBUFFER_COMPLETE;
 	
-	OXFEDE_LOG(valid ? LType::I : LType::E, GPUKIT::General, this, 
+	OXFEDE_LOG(valid ? LType::I : LType::E, LGPK::General, this, 
 		"-- framebuffer (id = %i) validation: %s --",
 		_private->id, valid ? "passed" : "failed");
 	
-	OXFEDE_LOG(valid ? LType::I : LType::E, GPUKIT::Buffer, this, 
+	OXFEDE_LOG(valid ? LType::I : LType::E, LGPK::Buffer, this, 
 		"glCheckFramebufferStatus(GL_FRAMEBUFFER) = %i", status);
 	
 	assert(valid);
@@ -128,10 +128,10 @@ void Buffer::setActive() {
 	_Private::activeBuffer = this;
 	glBindFramebuffer(GL_FRAMEBUFFER, _private->id);
 	
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+	OXFEDE_LOG(LType::I, LGPK::General, this, 
 		"-- activate framebuffer (id = %i) --", _private->id);
 	
-	OXFEDE_LOG(LType::I, GPUKIT::Buffer, this, 
+	OXFEDE_LOG(LType::I, LGPK::Buffer, this, 
 		"glBindFramebuffer(GL_FRAMEBUFFER, %i)", _private->id);
 }
 
@@ -165,7 +165,7 @@ Buffer::Clear Buffer::getClearTargets() const {
 }
 
 void Buffer::commit() {
-	OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+	OXFEDE_LOG(LType::I, LGPK::General, this, 
 		"-- commit framebuffer (id = %i) --", 
 		_private->id);
 
@@ -188,14 +188,14 @@ void Buffer::commit() {
 					if (txType == GL_TEXTURE_2D) {
 						glFramebufferTexture2D(GL_FRAMEBUFFER, target, txType, txId, 0);
 						
-						OXFEDE_LOG(LType::I, GPUKIT::Buffer, this, 
+						OXFEDE_LOG(LType::I, LGPK::Buffer, this, 
 							"glFramebufferTexture2D(GL_FRAMEBUFFER, %i, %i, %i, 0)", 
 							target, txType, txId);
 					}
 					else {
 						glFramebufferTexture(GL_FRAMEBUFFER, target, txId, 0);
 						
-						OXFEDE_LOG(LType::I, GPUKIT::Buffer, this, 
+						OXFEDE_LOG(LType::I, LGPK::Buffer, this, 
 							"glFramebufferTexture(GL_FRAMEBUFFER, %i, %i, 0)", 
 							target, txId);
 					}
@@ -203,21 +203,21 @@ void Buffer::commit() {
 				else if (state.previousTexture) {
 					auto txType = state.previousTexture->getType();
 
-					OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+					OXFEDE_LOG(LType::I, LGPK::General, this, 
 						"unbind framebuffer attachment: Target %i", 
 						target);
 
 					if (txType == GL_TEXTURE_2D) {
 						glFramebufferTexture2D(GL_FRAMEBUFFER, target, txType, 0, 0);
 						
-						OXFEDE_LOG(LType::I, GPUKIT::Buffer, this, 
+						OXFEDE_LOG(LType::I, LGPK::Buffer, this, 
 							"glFramebufferTexture2D(GL_FRAMEBUFFER, %i, %i, 0, 0)", 
 							target, txType);
 					}
 					else {
 						glFramebufferTexture(GL_FRAMEBUFFER, target, 0, 0);
 						
-						OXFEDE_LOG(LType::I, GPUKIT::Buffer, this, 
+						OXFEDE_LOG(LType::I, LGPK::Buffer, this, 
 							"glFramebufferTexture(GL_FRAMEBUFFER, %i, 0, 0)", 
 							target);
 					}
@@ -237,10 +237,10 @@ void Buffer::commit() {
 		if (!writes.size()) {
 			glDrawBuffer(GL_NONE);
 
-			OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+			OXFEDE_LOG(LType::I, LGPK::General, this, 
 				"-- no draw targets --");
 
-			OXFEDE_LOG(LType::I, GPUKIT::Buffer, this, 
+			OXFEDE_LOG(LType::I, LGPK::Buffer, this, 
 				"glDrawBuffer(GL_NONE)");
 		}
 		else {
@@ -259,16 +259,16 @@ void Buffer::commit() {
 			glDrawBuffers(i, writeTargets);
 			delete[] writeTargets;
 		
-			OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+			OXFEDE_LOG(LType::I, LGPK::General, this, 
 				"-- %i draw targets: [%s] --", 
 				i, writeIds.c_str());
 
-			OXFEDE_LOG(LType::I, GPUKIT::Buffer, this, 
+			OXFEDE_LOG(LType::I, LGPK::Buffer, this, 
 				"glDrawBuffers(%i, [%s])", 
 				i, writeIds.c_str());
 		}
 
-		OXFEDE_LOG(LType::I, GPUKIT::General, this, 
+		OXFEDE_LOG(LType::I, LGPK::General, this, 
 			"-- depth target %s --", 
 			getAttachment(Target::DEPTH) ? "present" : "not present");
 	}

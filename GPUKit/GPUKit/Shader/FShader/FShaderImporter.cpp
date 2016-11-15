@@ -45,12 +45,12 @@ static unordered_map<string, FShader*> cached;
 FShader* AssetImporter<FShader*>::import(const string& path) {
 	static AssetImporter<FShader>* logDummy = nullptr;
 	
-	OXFEDE_LOG(LType::I, GPUKIT::General, logDummy, 
+	OXFEDE_LOG(LType::I, LGPK::General, logDummy, 
 		"-- import: path: %s --", path.c_str());
 
 	auto found = cached.find(path);
 	if (found != cached.end()) {
-		OXFEDE_LOG(LType::I, GPUKIT::General, logDummy, 
+		OXFEDE_LOG(LType::I, LGPK::General, logDummy, 
 			"-- return cached --");
 		
 		return found->second;
@@ -152,29 +152,29 @@ FShader* AssetImporter<FShader*>::import(stringstream& input) {
 
 	static AssetImporter<FShader>* logDummy = nullptr;
 	
-	OXFEDE_LOG(LType::I, GPUKIT::Importer, logDummy, 
+	OXFEDE_LOG(LType::I, LGPK::Importer, logDummy, 
 		"-- ============ STATS: ============== --");
 	
-	OXFEDE_LOG(LType::I, GPUKIT::Importer, logDummy, 
+	OXFEDE_LOG(LType::I, LGPK::Importer, logDummy, 
 		"-- outputs: --");
 	
 	for (auto output : shader->outputs) {
-		OXFEDE_LOG(LType::I, GPUKIT::Importer, logDummy, 
+		OXFEDE_LOG(LType::I, LGPK::Importer, logDummy, 
 			"%s: %i", output.first.c_str(), output.second->location);
 	}
 
-	OXFEDE_LOG(LType::I, GPUKIT::Importer, logDummy, 
+	OXFEDE_LOG(LType::I, LGPK::Importer, logDummy, 
 		"");
 	
-	OXFEDE_LOG(LType::I, GPUKIT::Importer, logDummy, 
+	OXFEDE_LOG(LType::I, LGPK::Importer, logDummy, 
 		"-- uniforms: --");
 	
 	for (auto uniform : shader->uniforms) {
-		OXFEDE_LOG(LType::I, GPUKIT::Importer, logDummy, 
+		OXFEDE_LOG(LType::I, LGPK::Importer, logDummy, 
 			"%s", uniform.first.c_str());
 	}
 
-	OXFEDE_LOG(LType::I, GPUKIT::Importer, logDummy, 
+	OXFEDE_LOG(LType::I, LGPK::Importer, logDummy, 
 		"-- ------------ END --------------- --");
 
 	return shader;
