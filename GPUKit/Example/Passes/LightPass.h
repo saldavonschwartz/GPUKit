@@ -46,6 +46,7 @@ struct LightPass : public Pass {
 		program->link();
 
 		buffer = new Buffer;
+		buffer->setClearTargets(Buffer::Clear::ALL_COLORS);
 	}
 
 	~LightPass() {
@@ -55,8 +56,6 @@ struct LightPass : public Pass {
 
 	void render() override {
 		glDisable(GL_DEPTH_TEST);
-
-		buffer->setClearTargets(Buffer::Clear::ALL_COLORS);
 		buffer->commit();
 
 		string lId;

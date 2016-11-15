@@ -55,7 +55,6 @@ struct GeometryPass : public Pass {
 
 	void render() override {
 		glEnable(GL_DEPTH_TEST);
-
 		buffer->commit();
 
 		uvec2 size = ((Texture2D*)getOutput("outP"))->data.image.size;
