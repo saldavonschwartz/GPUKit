@@ -43,7 +43,7 @@
 using namespace OXFEDE::GPUKit;
 using namespace std;
 
-static unordered_map<string, Program*> cached;
+static unordered_map<string, AssetRef<Program*>> cached;
 
 Program* AssetImporter<Program*>::import(const string& path) {
 	static AssetImporter<Program*>* logDummy = nullptr;
@@ -56,7 +56,8 @@ Program* AssetImporter<Program*>::import(const string& path) {
 		OXFEDE_LOG(LType::I, LGPK::General, logDummy, 
 			"-- return cached --");
 
-		return found->second;
+		found->second.count++;
+		return found->second.value;
 	}
 
 	Program* program = new Program;
@@ -92,17 +93,25 @@ Program* AssetImporter<Program*>::import(const string& path) {
 		}
 	}
 
-	cached[path] = program;
+	cached[path].value = program;
+	cached[path].count++;
+
 	return program;
 }
 
 void AssetImporter<Program*>::release(Program* asset) {
+	assert(asset);
+
 	auto found = std::find_if(cached.begin(), cached.end(), [asset](const auto& pair) {
-		return pair.second == asset;
+		return pair.second.value == asset;
 	});
 
 	assert(found != cached.end());
+	auto ref = found->second;
+	ref.count--;
 
-	cached.erase(found);
-	delete asset;
+	if (!ref.count) {
+		cached.erase(found);
+		delete asset;
+	}
 }

@@ -31,11 +31,16 @@ namespace OXFEDE {
 	namespace GPUKit {
 
 		template <class T>
+		struct AssetRef {
+			int count{ 0 };
+			T value{ 0 };
+		};
+
+		template <class T>
 		class AssetImporter {
 
 		public:
-			template <class... ArgsT>
-			static T import(ArgsT... args);
+			template <class... ArgsT> static T import(ArgsT... args);
 			static void release(T asset);
 		};
 

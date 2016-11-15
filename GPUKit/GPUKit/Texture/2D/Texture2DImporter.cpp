@@ -38,7 +38,7 @@
 using namespace OXFEDE::GPUKit;
 using namespace std;
 
-static unordered_map<string, Texture2D*> cached;
+static unordered_map<string, AssetRef<Texture2D*>> cached;
 
 Texture2D* AssetImporter<Texture2D*>::import(const string& path, Texture2D::Data data, bool flipped) {
 	static AssetImporter<Texture2D*>* logDummy = nullptr;
@@ -52,7 +52,8 @@ Texture2D* AssetImporter<Texture2D*>::import(const string& path, Texture2D::Data
 		OXFEDE_LOG(LType::I, LGPK::General, logDummy, 
 			"-- return cached asset for path --");
 		
-		return found->second;
+		found->second.count++;
+		return found->second.value;
 	}
 
 	int width;
@@ -82,7 +83,8 @@ Texture2D* AssetImporter<Texture2D*>::import(const string& path, Texture2D::Data
 		"-- ------------ END --------------- --");
 
 	Texture2D* texture = new Texture2D(data);
-	cached[path] = texture;
+	cached[path].value = texture;
+	cached[path].count++;
 
 	return texture;
 }
@@ -91,16 +93,20 @@ void AssetImporter<Texture2D*>::release(Texture2D* asset) {
 	assert(asset);
 
 	auto found = std::find_if(cached.begin(), cached.end(), [asset](const auto& pair) {
-		return pair.second == asset;
+		return pair.second.value == asset;
 	});
 
 	assert(found != cached.end());
+	auto ref = found->second;
+	ref.count--;
 
-	if (asset->data.image.bytes) {
-		delete asset->data.image.bytes;
+	if (!ref.count) {
+		if (asset->data.image.bytes) {
+			delete asset->data.image.bytes;
+		}
+
+		cached.erase(found);
+		delete asset;
 	}
-
-	cached.erase(found);
-	delete asset;
 }
 

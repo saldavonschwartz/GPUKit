@@ -28,6 +28,10 @@
 
 #include "../GPUKit/Material/Material.h"
 #include "../GPUKit/Geometry/Geometry.h"
+#include  "../GPUKit/Texture/2D/Texture2D.h"
+#include  "../GPUKit/Texture/2D/Texture2DImporter.h"
+#include "../GPUKit/Program/Program.h"
+#include "../GPUKit/Program/ProgramImporter.h"
 
 #include <glm/glm.hpp>
 #include <vector>
@@ -52,4 +56,41 @@ struct Node {
 	Light* light{ nullptr };
 	OXFEDE::GPUKit::Geometry* geometry{ nullptr };
 	OXFEDE::GPUKit::Material* material{ nullptr };
+
+	~Node() {
+		// This is a temp measure until deciding on a 
+		// memory ownership / management policy.
+		if (light) {
+			delete light;
+		}
+
+		if (material) {
+			using OXFEDE::GPUKit::Program;
+			using OXFEDE::GPUKit::Texture2D;
+			using OXFEDE::GPUKit::AssetImporter;
+
+			Program* program = material->getProgram();
+			AssetImporter<Program*>::release(program);
+
+			Texture2D* tx = material->getAttribute<Texture2D*>("diffuse.map");
+			if (tx) {
+				AssetImporter<Texture2D*>::release(tx);
+			}
+
+			tx = material->getAttribute<Texture2D*>("specular.map");
+			if (tx) {
+				AssetImporter<Texture2D*>::release(tx);
+			}
+			
+			delete material;
+		}
+
+		if (geometry) {
+			delete geometry;
+		}
+
+		for (Node* child : children) {
+			delete child;
+		}
+	}
 };

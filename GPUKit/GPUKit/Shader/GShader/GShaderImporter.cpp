@@ -40,7 +40,7 @@
 using namespace OXFEDE::GPUKit;
 using namespace std;
 
-static unordered_map<string, GShader*> cached;
+static unordered_map<string, AssetRef<GShader*>> cached;
 
 GShader* AssetImporter<GShader*>::import(const string& path) {
 	static AssetImporter<GShader>* logDummy = nullptr;
@@ -52,8 +52,9 @@ GShader* AssetImporter<GShader*>::import(const string& path) {
 	if (found != cached.end()) {
 		OXFEDE_LOG(LType::I, LGPK::General, logDummy, 
 			"-- return cached --");
-
-		return found->second;
+		
+		found->second.count++;
+		return found->second.value;
 	}
 
 	ifstream file(path);
@@ -64,7 +65,9 @@ GShader* AssetImporter<GShader*>::import(const string& path) {
 	file.close();
 
 	auto shader = import(input);
-	cached[path] = shader;
+	cached[path].value = shader;
+	cached[path].count++;
+
 	return shader;
 }
 
@@ -148,12 +151,18 @@ GShader* AssetImporter<GShader*>::import(stringstream& input) {
 }
 
 void AssetImporter<GShader*>::release(GShader* asset) {
+	assert(asset);
+
 	auto found = std::find_if(cached.begin(), cached.end(), [asset](const auto& pair) {
-		return pair.second == asset;
+		return pair.second.value == asset;
 	});
 
 	assert(found != cached.end());
+	auto ref = found->second;
+	ref.count--;
 
-	cached.erase(found);
-	delete asset;
+	if (!ref.count) {
+		cached.erase(found);
+		delete asset;
+	}
 }
