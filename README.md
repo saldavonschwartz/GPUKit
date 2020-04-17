@@ -1,6 +1,6 @@
 # OXFEDE::GPUKit
 
-A C++ framework for using OpenGL in an object oriented way.
+A framework for implementing reconfigurable rendering pipelines in C++ / OpenGL
 
 The framework exposes OpenGL functionality thru an object oriented interface. It's still work in progress but supports the following constructs so far:
 
