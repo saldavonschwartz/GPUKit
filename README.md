@@ -1,4 +1,4 @@
-# OXFEDE::GPUKit
+# GPUKit
 
 A framework for implementing reconfigurable rendering pipelines in C++ / OpenGL
 
